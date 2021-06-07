@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block contents %}    
+  <h1 class="cover-heading"> 登陆 </h1>
+            
+  {% if error: %}
+    <div class="alert alert-warning" role="alert">
+      邮箱或密码错误, 请重新输入
+    </div>
+  {% else: %}
+    <p class="lead"> 输入邮箱和密码后登陆 </p>
+  {% endif %}
+
+  <form action="/login", method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <div class="input-group mb-3">
+        <input type="email" class="form-control" name='email' required='required' placeholder="Email">
+    </div>
+    <div class="input-group mb-3">
+      <input type="password" class="form-control" name='password' required='required' placeholder="Password">
+    </div>
+    <p class="lead"> 
+        <button type="submit" class="btn btn-lg btn-primary"> Sign in </button>                 
+        <a class="btn btn-lg btn-secondary" href="/register"> Register </a> 
+    </p>
+  </form>
+{% endblock %}

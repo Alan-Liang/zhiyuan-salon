@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block contents %}      
+  <h1 class="cover-heading"> 注册 </h1>          
+  {% if error: %}
+    <div class="alert alert-warning" role="alert">
+      该账号已被注册
+    </div>
+  {% else: %}
+    <p class="lead"> 输入邮箱和密码后进行注册 </p>
+  {% endif %}
+
+  <form action="/register", method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <div class="input-group mb-3">
+        <input type="email" class="form-control" required='required' name='email' placeholder="Email">
+    </div>
+    <div class="input-group mb-3">
+      <input type="password" class="form-control" required='required' name='password' id='password' placeholder="Password">
+    </div>
+    <div class="input-group mb-3">
+      <input type="password" class="form-control" required='required' name='confirm' id='confirm' placeholder="Confirm Password">
+    </div>
+    <p class="lead"> 
+        <button type="submit" class="btn btn-lg btn-primary"> Sign up </button>                 
+    </p>
+  </form>
+  
+  <script>
+    var password = document.getElementById("password")
+      , confirm_password = document.getElementById("confirm");
+
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  </script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block contents %}
+  <h1 class="cover-heading"> 致远沙龙查询 </h1>
+  <p class="lead"> 输入学号后点击下方按钮进行查询 </p>
+
+  <form action="/result">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name='id' placeholder="Student ID">
+    </div>
+
+    <p class="lead"> 
+      <button class="btn btn-lg btn-secondary"> 查询</button> 
+    </p>
+  </form>
+{% endblock %}

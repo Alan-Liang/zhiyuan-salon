@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block contents %}
+<h1 class="cover-heading"> 获取统计数据 </h1>
+<p class="lead"> 点击下方按钮，下载致远沙龙统计文件 </p>         
+
+<form action="/fetch", method="POST">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+  
+  <div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="select_all" checked>
+      <label class="form-check-label" > 全选 </label>
+    </div>
+  {% for offset in [-5, -4, -3, -2, -1, 0]: %}
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="year_{{ offset + 5 }}" name="year" value="{{ year + offset }}" checked='checked'>
+      <label class="form-check-label"> {{ year + offset }} </label>
+    </div>
+  {% endfor %}
+  </div>
+  
+  <p class="lead">
+    <button class="btn btn-lg btn-secondary"> 获取 </button> 
+  </p>
+</form>
+
+<script>
+  $( document ).ready(function() {
+    $("#select_all").click(function() {
+    $("#year_0").prop("checked", this.checked);
+    $("#year_1").prop("checked", this.checked);
+    $("#year_2").prop("checked", this.checked);
+    $("#year_3").prop("checked", this.checked);
+    $("#year_4").prop("checked", this.checked);          
+    $("#year_5").prop("checked", this.checked);
+  })})
+</script>
+{% endblock %}

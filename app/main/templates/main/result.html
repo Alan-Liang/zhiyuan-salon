@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block contents %}  
+  <h1 class="cover-heading"> 查询结果 </h1>
+  {% if error: %}
+    <p class="lead"> 没找到任何结果^_ </p>
+  {% else: %}                           
+    <p class="lead">
+      {{ report.stuid }} 同学参与共计{{ report.count_all }} 次。<br/>
+      其中致远沙龙 {{ report.count_zy}}   次，
+      参与相关院系讲座 {{ report.count_other}} 次。      
+    </p>
+
+    <div class="alert alert-secondary" role="alert" align="left">
+    {% if not report.all_ok %}              
+      <p>您尚未满足课程要求的参与次数：参与 ZY-INS 沙龙或讲座总数不足 16 次 :-(</p>              
+    {% elif not report.zy_ok %}
+      <p>您尚未满足课程要求的参与次数：参与 ZY-INS 沙龙次数不足 12 次 :-(</p>              
+    {% else %}
+      <p>您已经满足课程要求的参与次数 ;-)</p>              
+    {% endif %}   
+    </div>
+
+    <div id="accordion">
+      <div class="card bg-dark">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              参与记录
+            </button>
+          </h5>
+        </div>
+    
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <p>ZY-INS 沙龙参与记录</p>
+            <ul>
+              {% for act_title in report.acts_zy %}
+                <li>{{ act_title[0] }}</li>
+              {% endfor %}
+              {% if not report.has_acts_zy %}
+                <li> 无 </li>
+              {% endif %}
+            </ul>
+            <br/>
+            <p> 相关院系讲座参与记录 </p>
+            <ul>
+              {% for act_title in report.acts_other %}
+                <li> {{ act_title[0] }} <b> (x{{ act_title[1] }}) </b></li>
+              {% endfor %}
+              {% if not report.has_acts_other %}
+                <li>无</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>              
+    </div>
+  {% endif %}
+{% endblock %}
