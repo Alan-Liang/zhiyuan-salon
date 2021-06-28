@@ -162,8 +162,9 @@ def check_update_time(app):
     now_time = time.time()
     n_time = time.localtime(now_time)
     failed = False
-    if (u_time.tm_year, u_time.tm_mon, u_time.tm_mday, u_time.tm_hour) != (n_time.tm_year, n_time.tm_mon, n_time.tm_mday, u_time.tm_hour):
+    if (u_time.tm_year, u_time.tm_mon, u_time.tm_mday, u_time.tm_hour, u_time.tm_min / 10) != (n_time.tm_year, n_time.tm_mon, n_time.tm_mday, n_time.tm_hour, n_time.tm_min / 10):
         try:
+            print('here')
             update_text()
             app.table = get_map()
             u_time = n_time
