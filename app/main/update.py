@@ -80,7 +80,7 @@ def update_text():
     if not os.path.exists(save_path):
         os.makedirs(save_path) 
 
-    for record in salon_records:
+    for record in salon_records[-3:]:
         print('FETCH', record, 'info')
         try:
             html = requests.get(zy_article_url + record[1]).text
@@ -100,7 +100,7 @@ def get_map():
     sid_list_pattern = r'(\d+(\(\d+\))?、)*\d+(\(\d+\))?'
     sid_set = set()
 
-    names = [x[0] for x in salon_records]
+    names = [x[0] for x in salon_records[-3:]]
     for name in names:
         print('LOAD', name, 'data')
         in_file = os.path.join(save_path, salon_record_file % (name))
