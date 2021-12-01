@@ -47,9 +47,11 @@ def load_salon(save_dir):
                     if '(' in sid:
                         count = int(sid.split('(')[1][:-1])
                         sid = sid.split('(')[0]
-                    other[int(sid)] = other.get(int(sid), 0) + count
+                    if sid != "":
+                        other[int(sid)] = other.get(int(sid), 0) + count
                 else:
-                    zhiyuan[int(sid)] = zhiyuan.get(int(sid), 0) + 1
+                    if sid != "":
+                        zhiyuan[int(sid)] = zhiyuan.get(int(sid), 0) + 1
     return zhiyuan, other
 
 def write_to_sheet(zhiyuan, other, worksheet, students):
@@ -84,8 +86,8 @@ def export(years):
     zhiyuan, other = load_salon(os.path.join('.', 'saves'))
     workbook = xlwt.Workbook(encoding = 'utf-8')
 
-    write_to_sheet(zhiyuan, other, workbook.add_sheet('理科'), load_info(os.path.join('.', 'data', 'info.xlsx'), 1, years))
-    write_to_sheet(zhiyuan, other, workbook.add_sheet('工科'), load_info(os.path.join('.', 'data', 'info.xlsx'), 2, years))
+    write_to_sheet(zhiyuan, other, workbook.add_sheet('理科'), load_info(os.path.join('.', 'data', 'info.xlsx'), 0, years))
+    write_to_sheet(zhiyuan, other, workbook.add_sheet('工科'), load_info(os.path.join('.', 'data', 'info.xlsx'), 1, years))
 
     directory = os.path.join(os.getcwd(), 'data')
     filename  = '致远沙龙统计.xls'

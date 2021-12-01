@@ -143,3 +143,4 @@ app/defines.py
 /**/.DS_Store
 /**/.vscode
 /**/*.code-workspace
+uwsgi.ini

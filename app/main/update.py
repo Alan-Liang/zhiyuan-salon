@@ -100,7 +100,7 @@ def get_map():
     sid_list_pattern = r'(\d+(\(\d+\))?、)*\d+(\(\d+\))?'
     sid_set = set()
 
-    names = [x[0] for x in salon_records[-3:]]
+    names = [x[0] for x in salon_records]
     for name in names:
         print('LOAD', name, 'data')
         in_file = os.path.join(save_path, salon_record_file % (name))
@@ -115,7 +115,7 @@ def get_map():
                     salons[name].append(title)
                     sid_data[name].append([])
                 else:
-                    sid_list = s.split('、')
+                    sid_list = list(set(s.split('、')))
                     sid_data_now = []
                     for sid in sid_list:
                         sid_now = ''
@@ -164,7 +164,6 @@ def check_update_time(app):
     failed = False
     if (u_time.tm_year, u_time.tm_mon, u_time.tm_mday, u_time.tm_hour, u_time.tm_min / 10) != (n_time.tm_year, n_time.tm_mon, n_time.tm_mday, n_time.tm_hour, n_time.tm_min / 10):
         try:
-            print('here')
             update_text()
             app.table = get_map()
             u_time = n_time
