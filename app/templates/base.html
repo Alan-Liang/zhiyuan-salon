@@ -61,6 +61,10 @@
     .cover-container {
       margin-right: auto;
       margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100vh;
     }
 
     /* Padding for spacing */
@@ -126,18 +130,6 @@
 
     /* * Affix and center */
     @media (min-width: 40em) {
-
-      /* Pull out the header and footer */
-      .masthead {
-        position: fixed;
-        top: 0;
-      }
-
-      .mastfoot {
-        position: fixed;
-        bottom: 0;
-      }
-
       /* Start the vertical centering */
       .site-wrapper-inner {
         vertical-align: middle;
@@ -153,7 +145,6 @@
     }
 
     @media (min-width: 62em) {
-
       .masthead,
       .mastfoot,
       .cover-container {
