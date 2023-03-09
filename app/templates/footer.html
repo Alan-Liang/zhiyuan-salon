@@ -2,6 +2,9 @@
   <div class="inner">
     <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
     <p id="hitokoto"><a href="#" id="hitokoto_text"> :D 获取中... </a></p>
+    {% if time -%}
+    <p>数据同步时间: {{ time }}</p>
+    {%- endif %}
     <p>              
       Q-Zhiyuan Salon ©2021 Maintained by <a href='https://github.com/Evensgn'> Zhou Fan</a>, <a href='https://github.com/cla7aye15I4nd'> Dataisland</a>, <a href="https://github.com/Sakits">Sakits</a> and <a href="https://github.com/Alan-Liang">Alan Liang</a>. 
     </p>

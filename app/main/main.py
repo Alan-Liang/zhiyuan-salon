@@ -10,10 +10,10 @@ main = Blueprint('main', __name__, template_folder='templates')
 
 update.update_text()
 main.table = update.get_map()
+time = update.check_update_time(main)    
 
 @main.route('/')
 def index():    
-    time = update.check_update_time(main)    
     return render_template('main/index.html', time=time)
 
 @main.route('/result')
@@ -21,7 +21,7 @@ def result():
     id = request.args.get('id', type=str, default='')
     
     if id not in main.table:
-        return render_template('main/result.html', error=True)
+        return render_template('main/result.html', error=True, time=time)
     else:
         report = main.table[id]
         report.stuid = id
@@ -30,4 +30,4 @@ def result():
         report.zy_ok = report.count_zy >= 12
         report.has_acts_zy = len(report.acts_zy) > 0
         report.has_acts_other = len(report.acts_other) > 0
-        return render_template('main/result.html', report=report)
+        return render_template('main/result.html', report=report, time=time)

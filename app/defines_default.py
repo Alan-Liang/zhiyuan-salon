@@ -5,7 +5,7 @@ names = {
 save_path = 'saves'
 zy_article_url = 'https://zhiyuan.sjtu.edu.cn/api/get_singlepage_by_id/'
 
-time_str = '%04d-%02d-%02d %02d:%02d:%02d'
+time_str = '%04d-%02d-%02d %02d:%02d:%02d UTC+8'
 
 salon_records = [('2013', '2948'),
                  ('2014', '2943'),
@@ -14,8 +14,9 @@ salon_records = [('2013', '2948'),
                  ('2017', '2909'),
                  ('2018', '2919'),
                  ('2019', '3368'),
-		 ('2020', '3813'),
+                 ('2020', '3813'),
                  ('2021', '3911'),
+                 ('2022', '4077'),
                  ('other', '3814')]
 
 other_set = {'other'}
