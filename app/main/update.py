@@ -71,7 +71,13 @@ def process_html(name, html):
     out_file = os.path.join(save_path, salon_record_file % (name))
     print('WRITE', name, 'info to', out_file)
     with open(out_file, 'w', encoding='utf8') as f:
-        f.write('\n'.join(parser.lines))
+        f.write(''.join(x + '\n' for x in parser.lines))
+
+def process_text(name, text):
+    out_file = os.path.join(save_path, salon_record_file % (name))
+    print(f'WRITE {name} info to {out_file}')
+    with open(out_file, 'a', encoding='utf8') as f:
+        f.write(text)
 
 def update_text():
     update_time = time.time()
@@ -80,11 +86,20 @@ def update_text():
     if not os.path.exists(save_path):
         os.makedirs(save_path) 
 
-    for record in salon_records[-3:]:
-        print('FETCH', record, 'info')
+    for name, article_id in salon_records[-3:]:
+        print('FETCH', name, article_id, 'info')
         try:
-            html = requests.get(zy_article_url + record[1]).text
-            process_html(record[0], html)
+            html = requests.get(zy_article_url + article_id).text
+            process_html(name, html)
+        except Exception as e:
+            print('[ERROR] ', e)
+            failed = True
+    
+    for name, article_id in salon_records_notes_sjtu[-3:]:
+        print('FETCH', name, article_id)
+        try:
+            text = requests.get(article_id).text
+            process_text(name, text)
         except Exception as e:
             print('[ERROR] ', e)
             failed = True
@@ -101,6 +116,9 @@ def get_map():
     sid_set = set()
 
     names = [x[0] for x in salon_records]
+    for name, _ in salon_records_notes_sjtu:
+        if name not in names:
+            names.append(name)
     for name in names:
         print('LOAD', name, 'data')
         in_file = os.path.join(save_path, salon_record_file % (name))

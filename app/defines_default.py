@@ -17,7 +17,12 @@ salon_records = [('2013', '2948'),
                  ('2020', '3813'),
                  ('2021', '3911'),
                  ('2022', '4077'),
+                 ('2023', '4250'),
                  ('other', '3814')]
+
+salon_records_notes_sjtu = [
+    ('2023', 'https://notes.sjtu.edu.cn/..../download'),
+]
 
 other_set = {'other'}
 
