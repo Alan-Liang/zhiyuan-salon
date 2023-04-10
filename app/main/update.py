@@ -74,9 +74,13 @@ def process_html(name, html):
         f.write(''.join(x + '\n' for x in parser.lines))
 
 def process_text(name, text):
+    prelude_end = '致远沙龙打卡记录可通过 https://zysalon.com/ 进行查询。'
+    ix = text.find(prelude_end)
+    if ix >= 0:
+        text = text[ix + len(prelude_end):].strip()
     out_file = os.path.join(save_path, salon_record_file % (name))
     print(f'WRITE {name} info to {out_file}')
-    with open(out_file, 'a', encoding='utf8') as f:
+    with open(out_file, 'w', encoding='utf8') as f:
         f.write(text)
 
 def update_text():
