@@ -38,7 +38,7 @@ def load_salon(save_dir):
             continue
 
         with open(os.path.join(save_dir, filename)) as f:
-            text = f.read().splitlines()
+            text = list(filter(lambda x: x.strip() != '', f.read().splitlines()))
 
         for names, people in zip(text[::2], text[1::2]):
             for sid in people.strip('、').split('、'):                
